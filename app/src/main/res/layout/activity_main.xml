@@ -9,8 +9,31 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".ui.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
+    <LinearLayout
+        android:id="@+id/llSearch"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:drawableLeft="@android:drawable/ic_search_category_default"
+            android:drawablePadding="12sp"
+            android:padding="12sp"
+            android:textSize="20sp"
+            android:hint="@string/app_searchbox_hint"
+            android:background="@drawable/edit_text"
+            android:layout_weight="0.9"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/editText" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/lstSongList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/llSearch"
+        android:layout_marginTop="12sp"
+        />
+
 </RelativeLayout>

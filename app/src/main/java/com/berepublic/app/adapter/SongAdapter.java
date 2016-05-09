@@ -57,7 +57,6 @@ public class SongAdapter extends ArrayAdapter<Song> {
             holder = (SongHolder) item.getTag();
         }
 
-
         return item;
 
     }

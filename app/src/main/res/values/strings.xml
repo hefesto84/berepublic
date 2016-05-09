@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">BeRepublic!</string>
+    <string name="app_searchbox_hint">Type to search...</string>
 </resources>
