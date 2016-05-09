@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">BeRepublic!</string>
     <string name="app_searchbox_hint">Type to search...</string>
+    <string name="app_error_itunes">ITunes connection error.</string>
 </resources>

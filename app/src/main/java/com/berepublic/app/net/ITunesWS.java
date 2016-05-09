@@ -2,6 +2,7 @@ package com.berepublic.app.net;
 
 
 import com.berepublic.app.listener.ITunesListener;
+import com.berepublic.app.model.ITunesResponse;
 import com.berepublic.app.model.Song;
 import com.berepublic.app.service.ITunesService;
 import com.berepublic.app.utils.Constants;
@@ -39,14 +40,14 @@ public class ITunesWS {
     }
 
     public void fetchSongList(String criteria, final ITunesListener listener){
-        service.fetchSongList(criteria).enqueue(new Callback<List<Song>>() {
+        service.fetchSongList(criteria).enqueue(new Callback<ITunesResponse>() {
             @Override
-            public void onResponse(Call<List<Song>> call, Response<List<Song>> response) {
-                listener.OnITunesSongListReceived(response.body());
+            public void onResponse(Call<ITunesResponse> call, Response<ITunesResponse> response) {
+                listener.OnITunesSongListReceived(response.body().getResults());
             }
 
             @Override
-            public void onFailure(Call<List<Song>> call, Throwable t) {
+            public void onFailure(Call<ITunesResponse> call, Throwable t) {
                 listener.OnITunesError(t.getMessage());
             }
         });

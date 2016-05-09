@@ -6,9 +6,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.berepublic.app.R;
 import com.berepublic.app.adapter.SongAdapter;
+import com.berepublic.app.controller.ITunesController;
+import com.berepublic.app.listener.ITunesListener;
 import com.berepublic.app.model.Song;
 
 import org.parceler.Parcels;
@@ -19,7 +22,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements ListView.OnItemClickListener{
+public class MainActivity extends AppCompatActivity implements ListView.OnItemClickListener, ITunesListener{
 
     private SongAdapter mAdapter;
     private List<Song> mListSongs;
@@ -37,14 +40,13 @@ public class MainActivity extends AppCompatActivity implements ListView.OnItemCl
         mAdapter = new SongAdapter(this,mListSongs,R.layout.item_list_song);
         mList.setAdapter(mAdapter);
         mList.setOnItemClickListener(this);
+
+        ITunesController.getInstance().fetchSongList("Rammstein",this);
     }
 
 
     private List<Song> testSongList(){
         List<Song> songs = new ArrayList<Song>();
-        for(int i = 0; i<10; i++){
-            songs.add(new Song());
-        }
         return songs;
     }
 
@@ -53,5 +55,17 @@ public class MainActivity extends AppCompatActivity implements ListView.OnItemCl
         Intent intent = new Intent(this,PlayerActivity.class);
         intent.putExtra("song", Parcels.wrap(mAdapter.getItem(i)));
         startActivity(intent);
+    }
+
+    @Override
+    public void OnITunesSongListReceived(List<Song> songs) {
+        mAdapter.clear();
+        mAdapter.addAll(songs);
+        mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void OnITunesError(String error) {
+        Toast.makeText(this,error,Toast.LENGTH_SHORT).show();
     }
 }

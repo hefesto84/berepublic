@@ -2,40 +2,88 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
-    android:padding="8sp"
+
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     >
 
     <LinearLayout
+        android:padding="8sp"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <com.facebook.drawee.view.SimpleDraweeView
+            android:background="@color/beRepublic_gray"
             android:id="@+id/imgSong"
-            android:layout_width="100sp"
-            android:layout_height="100sp" />
+            android:layout_width="80sp"
+            android:layout_height="80sp" />
 
         <LinearLayout
+            android:gravity="center_vertical"
             android:layout_marginLeft="8sp"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
+                android:maxLines="1"
+                android:padding="2sp"
+                android:textStyle="bold"
+                android:textSize="14sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Medium Text"
                 android:id="@+id/txtSongName" />
             <TextView
+                android:maxLines="1"
+                android:padding="2sp"
+                android:textSize="14sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Medium Text"
                 android:id="@+id/txtArtistName" />
+            <TextView
+                android:maxLines="1"
+                android:padding="2sp"
+                android:textSize="10sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Medium Text"
+                android:id="@+id/txtAlbumName" />
+            <TextView
+                android:maxLines="1"
+                android:padding="2sp"
+                android:textSize="10sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Medium Text"
+                android:id="@+id/txtReleaseDate" />
         </LinearLayout>
+
     </LinearLayout>
+    <RelativeLayout
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:padding="4sp"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/beRepublic_white"
+            android:background="@color/colorPrimary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Industrial"
+            android:id="@+id/txtGenre" />
+
+
+    </RelativeLayout>
+
 </RelativeLayout>
