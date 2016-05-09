@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.Context;
 import android.content.res.Configuration;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
+
 /**
  * Created by dani on 9/5/16.
  */
@@ -12,6 +14,7 @@ public class BaseApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        Fresco.initialize(this);
     }
 
     @Override
