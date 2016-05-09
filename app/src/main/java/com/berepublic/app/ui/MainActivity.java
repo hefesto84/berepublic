@@ -1,5 +1,6 @@
 package com.berepublic.app.ui;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +10,8 @@ import android.widget.ListView;
 import com.berepublic.app.R;
 import com.berepublic.app.adapter.SongAdapter;
 import com.berepublic.app.model.Song;
+
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +50,8 @@ public class MainActivity extends AppCompatActivity implements ListView.OnItemCl
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
+        Intent intent = new Intent(this,PlayerActivity.class);
+        intent.putExtra("song", Parcels.wrap(mAdapter.getItem(i)));
+        startActivity(intent);
     }
 }
