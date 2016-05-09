@@ -1,8 +1,9 @@
-package com.berepublic.app.service;
+package com.berepublic.app.net;
 
 
 import com.berepublic.app.listener.ITunesListener;
 import com.berepublic.app.model.Song;
+import com.berepublic.app.service.ITunesService;
 import com.berepublic.app.utils.Constants;
 
 import java.util.List;
@@ -22,14 +23,12 @@ public class ITunesWS {
     private static ITunesWS instance = null;
 
     private ITunesWS(){
-
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.WS_BASEURL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         service = retrofit.create(ITunesService.class);
-
     }
 
     public static ITunesWS getInstance(){
