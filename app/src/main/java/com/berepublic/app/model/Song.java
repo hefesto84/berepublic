@@ -10,7 +10,7 @@ import java.util.Date;
  */
 
 @Parcel
-public class Song implements Comparable<Song>{
+public class Song{
 
     public int artistId;
     public long collectionId;
@@ -36,7 +36,7 @@ public class Song implements Comparable<Song>{
     public int discNumber;
     public int trackCount;
     public int trackNumber;
-    public int trackTimeMilis;
+    public long trackTimeMillis;
     public String country;
     public String currency;
     public String primaryGenreName;
@@ -44,17 +44,6 @@ public class Song implements Comparable<Song>{
 
     public Song() {
 
-    }
-
-    @Override
-    public int compareTo(Song song) {
-        if(song.trackPrice < this.trackPrice){
-            return -1;
-        }
-        if(song.trackPrice > this.trackPrice){
-            return 1;
-        }
-        return 0;
     }
 
     public static Comparator<Song> Price = new Comparator<Song>() {
@@ -73,10 +62,10 @@ public class Song implements Comparable<Song>{
     public static Comparator<Song> Duration = new Comparator<Song>() {
         @Override
         public int compare(Song song, Song t1) {
-            if(song.trackTimeMilis < t1.trackTimeMilis){
+            if(song.trackTimeMillis < t1.trackTimeMillis){
                 return -1;
             }
-            if(song.trackTimeMilis > t1.trackTimeMilis){
+            if(song.trackTimeMillis > t1.trackTimeMillis){
                 return 1;
             }
             return 0;
