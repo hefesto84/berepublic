@@ -2,4 +2,7 @@
     <string name="app_name">BeRepublic!</string>
     <string name="app_searchbox_hint">Type to search...</string>
     <string name="app_error_itunes">ITunes connection error.</string>
+    <string name="activity_player_bandname">Default Band Name</string>
+    <string name="activity_player_songname">Default Song Name</string>
+    <string name="activity_player_default_time">00:00</string>
 </resources>

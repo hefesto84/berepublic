@@ -3,6 +3,7 @@ package com.berepublic.app.ui;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.TextView;
 
 import com.berepublic.app.R;
 import com.berepublic.app.model.Song;
@@ -21,14 +22,17 @@ public class PlayerActivity extends AppCompatActivity {
 
     private Song mSong;
 
-    @Bind(R.id.imgSong)
-    SimpleDraweeView imgSong;
+    @Bind(R.id.imgSong) SimpleDraweeView imgSong;
+    @Bind(R.id.txtBandName) TextView txtBandName;
+    @Bind(R.id.txtSongName) TextView txtSongName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player);
+
         mSong = (Song) Parcels.unwrap(getIntent().getParcelableExtra("song"));
+
         ButterKnife.bind(this);
 
         load();
@@ -36,6 +40,8 @@ public class PlayerActivity extends AppCompatActivity {
 
     private void load(){
         imgSong.setImageURI(Uri.parse(mSong.getArtworkUrl100()));
+        txtBandName.setText(mSong.getArtistName());
+        txtSongName.setText(mSong.getTrackName());
     }
 
 }
