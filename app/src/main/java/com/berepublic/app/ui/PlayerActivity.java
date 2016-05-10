@@ -14,6 +14,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.berepublic.app.R;
+import com.berepublic.app.model.Playlist;
 import com.berepublic.app.model.Song;
 import com.berepublic.app.service.AudioService;
 import com.berepublic.app.utils.Constants;
@@ -44,7 +45,7 @@ public class PlayerActivity extends AppCompatActivity {
     @Bind(R.id.btnPrevious)     ImageButton btnPrevious;
     @Bind(R.id.btnRewind)       ImageButton btnRewind;
 
-    private Song mSong;
+    private Playlist mPlaylist;
     private boolean isPlaying = false;
     private AudioService mAudioService;
     private Intent mPlayerIntent;
@@ -64,11 +65,9 @@ public class PlayerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player);
-
-        mSong = (Song) Parcels.unwrap(getIntent().getParcelableExtra("song"));
+        mPlaylist = (Playlist)Parcels.unwrap(getIntent().getParcelableExtra("playlist"));
 
         ButterKnife.bind(this);
-        initService();
 
         load();
     }
@@ -77,19 +76,14 @@ public class PlayerActivity extends AppCompatActivity {
     protected void onDestroy() {
         stopService(mPlayerIntent);
         mAudioService=null;
+        unbindService(audioServiceConnection);
         super.onDestroy();
     }
 
     private void load(){
-        imgSong.setImageURI(Uri.parse(mSong.artworkUrl100));
-        txtBandName.setText(mSong.artistName);
-        txtSongName.setText(mSong.trackName);
-
-        //mAudioService.playSong();
-    }
-
-    private void initService(){
-        //mAudioService.initialize();
+        imgSong.setImageURI(Uri.parse(mPlaylist.songs.get(mPlaylist.currentSong).artworkUrl100));
+        txtBandName.setText(mPlaylist.songs.get(mPlaylist.currentSong).artistName);
+        txtSongName.setText(mPlaylist.songs.get(mPlaylist.currentSong).trackName);
     }
 
     @OnClick({R.id.btnFastForward, R.id.btnNext, R.id.btnPause, R.id.btnPlay, R.id.btnPrevious, R.id.btnRewind})
@@ -98,29 +92,28 @@ public class PlayerActivity extends AppCompatActivity {
             case R.id.btnFastForward:
                 break;
             case R.id.btnNext:
+                mPlaylist.nextSong();
+                mAudioService.nextSong();
+                load();
                 break;
             case R.id.btnPause:
-                pause();
+                btnPlay.setVisibility(View.VISIBLE);
+                btnPause.setVisibility(View.GONE);
+                mAudioService.pauseSong();
                 break;
             case R.id.btnPlay:
-                play();
+                btnPlay.setVisibility(View.GONE);
+                btnPause.setVisibility(View.VISIBLE);
+                mAudioService.playSong();
                 break;
             case R.id.btnPrevious:
+                mPlaylist.previousSong();
+                mAudioService.previousSong();
+                load();
                 break;
             case R.id.btnRewind:
                 break;
         }
-    }
-
-    private void pause(){
-        btnPlay.setVisibility(View.VISIBLE);
-        btnPause.setVisibility(View.GONE);
-    }
-
-    private void play(){
-        btnPlay.setVisibility(View.GONE);
-        btnPause.setVisibility(View.VISIBLE);
-        mAudioService.playSong();
     }
 
     private ServiceConnection audioServiceConnection = new ServiceConnection(){
@@ -131,9 +124,7 @@ public class PlayerActivity extends AppCompatActivity {
 
             mAudioService = binder.getService();
 
-            List<Song> songs = new ArrayList<Song>();
-            songs.add(mSong);
-            mAudioService.addPlayList(songs);
+            mAudioService.addPlayList(mPlaylist);
 
             isPlaying = true;
             Log.d(Constants.TAG,"Service connected");

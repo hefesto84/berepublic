@@ -11,6 +11,7 @@ import android.os.PowerManager;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.berepublic.app.model.Playlist;
 import com.berepublic.app.model.Song;
 import com.berepublic.app.utils.Constants;
 
@@ -23,7 +24,8 @@ public class AudioService extends Service implements MediaPlayer.OnPreparedListe
 
     private MediaPlayer mPlayer;
     private List<Song> mSongs;
-    private int mCurrentSong;
+    private Playlist mPlaylist;
+    //private int mCurrentSong;
     private final IBinder mAudioServiceBinder = new AudioServiceBinder();
 
     @Override
@@ -33,7 +35,7 @@ public class AudioService extends Service implements MediaPlayer.OnPreparedListe
     }
 
     public void initialize(){
-        mCurrentSong = 0;
+       // mCurrentSong = 0;
         mPlayer = new MediaPlayer();
         mPlayer.setWakeMode(getApplicationContext(), PowerManager.PARTIAL_WAKE_LOCK);
         mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
@@ -42,19 +44,32 @@ public class AudioService extends Service implements MediaPlayer.OnPreparedListe
         mPlayer.setOnErrorListener(this);
     }
 
-    public void addPlayList(List<Song> songs){
-        this.mSongs = songs;
+    public void addPlayList(Playlist playlist){
+        //this.mSongs = songs;
+        mPlaylist = playlist;
+    }
+
+    public void nextSong(){
+        mPlaylist.nextSong();
+        pauseSong();
+    }
+
+    public void previousSong(){
+        mPlaylist.previousSong();
+        playSong();
+    }
+
+    public void pauseSong(){
+        mPlayer.pause();
     }
 
     public void playSong(){
         mPlayer.reset();
-
         try{
-            mPlayer.setDataSource(mSongs.get(0).previewUrl);
+            mPlayer.setDataSource(mPlaylist.songs.get(mPlaylist.currentSong).previewUrl);
         }catch(Exception e){
             Log.e(Constants.TAG,"Error playing song.");
         }
-
         mPlayer.prepareAsync();
     }
 

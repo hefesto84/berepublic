@@ -18,6 +18,7 @@ import com.berepublic.app.adapter.SuggestionsAdapter;
 import com.berepublic.app.controller.ITunesController;
 import com.berepublic.app.filter.SongFilter;
 import com.berepublic.app.listener.ITunesListener;
+import com.berepublic.app.model.Playlist;
 import com.berepublic.app.model.Song;
 import com.berepublic.app.utils.Constants;
 import com.berepublic.app.widget.SuggestionsTextView;
@@ -35,6 +36,7 @@ import butterknife.OnClick;
 public class MainActivity extends AppCompatActivity implements ListView.OnItemClickListener, ITunesListener{
 
     private SongAdapter mAdapter;
+    private Playlist mPlaylist;
     private List<Song> mListSongs = new ArrayList<Song>();
     private int mLastFilter = SongFilter.FILTER_DISABLED;
 
@@ -75,15 +77,16 @@ public class MainActivity extends AppCompatActivity implements ListView.OnItemCl
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         Intent intent = new Intent(this,PlayerActivity.class);
-        intent.putExtra("song", Parcels.wrap(mAdapter.getItem(i)));
+        mPlaylist.currentSong = i;
+        intent.putExtra("playlist",Parcels.wrap(mPlaylist));
         startActivity(intent);
     }
 
     @Override
     public void OnITunesSongListReceived(List<Song> songs) {
-        mListSongs = songs;
+        mPlaylist = new Playlist(songs,0);
         mAdapter.clear();
-        mAdapter.addAll(mListSongs);
+        mAdapter.addAll(mPlaylist.songs);
         mAdapter.notifyDataSetChanged();
         mLastFilter = SongFilter.FILTER_DISABLED;
     }
@@ -101,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements ListView.OnItemCl
                 mLastFilter =(((mLastFilter == SongFilter.FILTER_BY_DURATION_ASC) || (mLastFilter == SongFilter.FILTER_DISABLED))?SongFilter.FILTER_BY_DURATION_DES:SongFilter.FILTER_BY_DURATION_ASC);
 
                 if(mLastFilter == SongFilter.FILTER_BY_DURATION_ASC) {
-                    Collections.sort(mListSongs, Song.Duration);
+                    Collections.sort(mPlaylist.songs, Song.Duration);
                 }else {
                     Collections.reverse(mListSongs);
                 }
@@ -112,9 +115,9 @@ public class MainActivity extends AppCompatActivity implements ListView.OnItemCl
                 mLastFilter =(((mLastFilter == SongFilter.FILTER_BY_GENRE_ASC) || (mLastFilter == SongFilter.FILTER_DISABLED))?SongFilter.FILTER_BY_GENRE_DES:SongFilter.FILTER_BY_GENRE_ASC);
 
                 if(mLastFilter == SongFilter.FILTER_BY_GENRE_ASC) {
-                    Collections.sort(mListSongs, Song.Genre);
+                    Collections.sort(mPlaylist.songs, Song.Genre);
                 }else {
-                    Collections.reverse(mListSongs);
+                    Collections.reverse(mPlaylist.songs);
                 }
 
                 break;
@@ -125,14 +128,14 @@ public class MainActivity extends AppCompatActivity implements ListView.OnItemCl
                 if(mLastFilter == SongFilter.FILTER_BY_PRICE_ASC) {
                     Collections.sort(mListSongs, Song.Price);
                 }else {
-                    Collections.reverse(mListSongs);
+                    Collections.reverse(mPlaylist.songs);
                 }
 
                 break;
         }
 
         mAdapter.clear();
-        mAdapter.addAll(mListSongs);
+        mAdapter.addAll(mPlaylist.songs);
         mAdapter.notifyDataSetChanged();
 
     }
