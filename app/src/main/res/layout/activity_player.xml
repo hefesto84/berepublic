@@ -4,130 +4,168 @@
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:background="@color/beRepublic_white"
     tools:context=".ui.MainActivity">
 
-    <LinearLayout
-        android:id="@+id/llSongInformation"
-        android:padding="8dp"
-        android:layout_marginBottom="8dp"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/backgroundPlayer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/activity_player_bandname"
-            android:id="@+id/txtBandName" />
-
-        <TextView
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/activity_player_songname"
-            android:id="@+id/txtSongName" />
-
-        <com.facebook.drawee.view.SimpleDraweeView
-            android:layout_marginTop="20sp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_width="220sp"
-            android:layout_height="220sp"
-            android:id="@+id/imgSong" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/llPlayerInformation"
-        android:layout_below="@id/llSongInformation"
-        android:padding="8dp"
-        android:orientation="vertical"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/background"
+        />
+    <RelativeLayout
+        android:padding="16dp"
+        android:background="#80000000"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <LinearLayout
+            android:id="@+id/llSongInformation"
+            android:padding="8dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:layout_marginTop="20sp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_width="220sp"
+                android:layout_height="220sp"
+                android:id="@+id/imgSong" />
+
+            <TextView
+                android:textColor="@color/beRepublic_white"
+                android:textStyle="bold"
+                android:layout_marginTop="12dp"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/activity_player_bandname"
+                android:id="@+id/txtBandName" />
+
+            <TextView
+                android:textColor="#f8665e"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/activity_player_songname"
+                android:id="@+id/txtSongName" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llPlayerInformation"
+            android:layout_below="@id/llSongInformation"
+            android:padding="8dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:textColor="@color/beRepublic_white"
+                    android:textStyle="bold"
+                    android:layout_weight="0.1"
+                    android:textSize="18dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="@string/activity_player_default_time"
+                    android:id="@+id/textView" />
+
+                <TextView
+                    android:textColor="@color/beRepublic_white"
+                    android:textStyle="bold"
+                    android:layout_weight="0"
+                    android:textSize="18dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="@string/activity_player_default_time"
+                    android:id="@+id/textView2" />
+            </LinearLayout>
+
+            <ProgressBar
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="18dp"
+                android:progress="33"
+                android:backgroundTint="@color/cardview_dark_background"
+                android:background="@color/beRepublic_white"
+                android:id="@+id/progressBar" />
+
+        </LinearLayout>
+
+        <LinearLayout
+
+            android:id="@+id/llPlayerControllers"
+            android:padding="12dp"
+            android:layout_below="@id/llPlayerInformation"
+            android:layout_centerHorizontal="true"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <TextView
-                android:layout_weight="0.1"
-                android:textSize="18dp"
+            <ImageButton
+                android:layout_weight="0.125"
+                android:background="#00000000"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/activity_player_default_time"
-                android:id="@+id/textView" />
+                android:src="@android:drawable/ic_media_previous"
+                android:id="@+id/btnPrevious" />
 
-            <TextView
-                android:layout_weight="0"
-                android:textSize="18dp"
+            <ImageButton
+                android:layout_weight="0.125"
+                android:background="#00000000"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/activity_player_default_time"
-                android:id="@+id/textView2" />
+                android:src="@android:drawable/ic_media_rew"
+                android:id="@+id/btnRewind" />
+
+            <ImageButton
+                android:layout_weight="0.125"
+                android:background="#00000000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@android:drawable/ic_media_play"
+                android:id="@+id/btnPlay" />
+
+            <ImageButton
+                android:layout_weight="0.125"
+                android:background="#00000000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:src="@android:drawable/ic_media_pause"
+                android:id="@+id/btnPause" />
+
+            <ImageButton
+                android:layout_weight="0.125"
+                android:background="#00000000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@android:drawable/ic_media_ff"
+                android:id="@+id/btnFastForward" />
+
+            <ImageButton
+                android:layout_weight="0.125"
+                android:background="#00000000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@android:drawable/ic_media_next"
+                android:id="@+id/btnNext" />
         </LinearLayout>
-
-        <ProgressBar
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="match_parent"
-            android:layout_height="18dp"
-            android:progress="33"
-            android:id="@+id/progressBar" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/llPlayerControllers"
-        android:layout_below="@id/llPlayerInformation"
-        android:layout_centerHorizontal="true"
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@android:drawable/ic_media_previous"
-            android:id="@+id/btnPrevious" />
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@android:drawable/ic_media_rew"
-            android:id="@+id/btnRewind" />
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@android:drawable/ic_media_play"
-            android:id="@+id/btnPlay" />
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:src="@android:drawable/ic_media_pause"
-            android:id="@+id/btnPause" />
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@android:drawable/ic_media_ff"
-            android:id="@+id/btnFastForward" />
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@android:drawable/ic_media_next"
-            android:id="@+id/btnNext" />
-    </LinearLayout>
-
+    </RelativeLayout>
 </RelativeLayout>

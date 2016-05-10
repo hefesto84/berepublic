@@ -36,6 +36,7 @@ import butterknife.OnClick;
 public class PlayerActivity extends AppCompatActivity {
 
     @Bind(R.id.imgSong)         SimpleDraweeView imgSong;
+    @Bind(R.id.backgroundPlayer) SimpleDraweeView imgBackground;
     @Bind(R.id.txtBandName)     TextView txtBandName;
     @Bind(R.id.txtSongName)     TextView txtSongName;
     @Bind(R.id.btnFastForward)  ImageButton btnFastForward;
@@ -84,6 +85,7 @@ public class PlayerActivity extends AppCompatActivity {
         imgSong.setImageURI(Uri.parse(mPlaylist.songs.get(mPlaylist.currentSong).artworkUrl100));
         txtBandName.setText(mPlaylist.songs.get(mPlaylist.currentSong).artistName);
         txtSongName.setText(mPlaylist.songs.get(mPlaylist.currentSong).trackName);
+        imgBackground.setImageURI(Uri.parse(mPlaylist.songs.get(mPlaylist.currentSong).artworkUrl100));
     }
 
     @OnClick({R.id.btnFastForward, R.id.btnNext, R.id.btnPause, R.id.btnPlay, R.id.btnPrevious, R.id.btnRewind})
