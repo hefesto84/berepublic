@@ -22,4 +22,10 @@ public interface ITunesService {
     Call<ITunesResponse> fetchSongList(
             @Query(Constants.WS_FIELD_SEARCH) String criteria
     );
+
+    @GET(Constants.WS_ITUNES)
+    Call<ITunesResponse> fetchSuggestions(
+            @Query(Constants.WS_FIELD_SEARCH) String criteria,
+            @Query(Constants.WS_FIELD_LIMIT) int limit
+    );
 }

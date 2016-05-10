@@ -1,12 +1,15 @@
 package com.berepublic.app.net;
 
 
+import android.util.Log;
+
 import com.berepublic.app.listener.ITunesListener;
 import com.berepublic.app.model.ITunesResponse;
 import com.berepublic.app.model.Song;
 import com.berepublic.app.service.ITunesService;
 import com.berepublic.app.utils.Constants;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -22,6 +25,7 @@ public class ITunesWS {
 
     private static ITunesService service;
     private static ITunesWS instance = null;
+    private static final int MAX_SUGGESTIONS = 10;
 
     private ITunesWS(){
         Retrofit retrofit = new Retrofit.Builder()
@@ -51,5 +55,14 @@ public class ITunesWS {
                 listener.OnITunesError(t.getMessage());
             }
         });
+    }
+
+    public List<Song> fetchSuggestions(String criteria){
+        try{
+            return service.fetchSuggestions(criteria,MAX_SUGGESTIONS).execute().body().getResults();
+        }catch(Exception e) {
+            Log.d(Constants.TAG,"Error retrieving suggestions.");
+            return new ArrayList<Song>();
+        }
     }
 }

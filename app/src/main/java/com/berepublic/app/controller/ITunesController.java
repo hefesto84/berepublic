@@ -4,6 +4,8 @@ import com.berepublic.app.listener.ITunesListener;
 import com.berepublic.app.model.Song;
 import com.berepublic.app.net.ITunesWS;
 
+import java.util.List;
+
 /**
  * Created by dani on 9/5/16.
  */
@@ -24,6 +26,10 @@ public class ITunesController {
 
     public void fetchSongList(String criteria, ITunesListener listener){
         ITunesWS.getInstance().fetchSongList(criteria,listener);
+    }
+
+    public List<Song> fetchSuggestions(String criteria){
+        return ITunesWS.getInstance().fetchSuggestions(criteria);
     }
 
 }

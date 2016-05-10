@@ -1,18 +1,23 @@
 package com.berepublic.app.ui;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.berepublic.app.R;
 import com.berepublic.app.adapter.SongAdapter;
+import com.berepublic.app.adapter.SuggestionsAdapter;
 import com.berepublic.app.controller.ITunesController;
 import com.berepublic.app.listener.ITunesListener;
 import com.berepublic.app.model.Song;
+import com.berepublic.app.widget.SuggestionsTextView;
 
 import org.parceler.Parcels;
 
@@ -25,9 +30,10 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity implements ListView.OnItemClickListener, ITunesListener{
 
     private SongAdapter mAdapter;
-    private List<Song> mListSongs;
+    private List<Song> mListSongs = new ArrayList<Song>();
 
     @Bind(R.id.lstSongList) ListView mList;
+    @Bind(R.id.txtSearch) SuggestionsTextView txtSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,19 +41,28 @@ public class MainActivity extends AppCompatActivity implements ListView.OnItemCl
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        mListSongs = testSongList();
-
         mAdapter = new SongAdapter(this,mListSongs,R.layout.item_list_song);
         mList.setAdapter(mAdapter);
         mList.setOnItemClickListener(this);
 
-        ITunesController.getInstance().fetchSongList("Anaal Nathrakh",this);
-    }
+        txtSearch.setThreshold(1);
+
+        final SuggestionsAdapter adapter = new SuggestionsAdapter(this);
+
+        txtSearch.setAdapter(adapter);
+        txtSearch.setLoadingIndicator(null);
+        txtSearch.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                Song song = (Song)adapterView.getItemAtPosition(position);
+                String criteria = song.getArtistName() + " " + song.getTrackName();
+                txtSearch.setText(criteria);
+                hideKeyboard();
+                ITunesController.getInstance().fetchSongList(criteria,MainActivity.this);
+            }
+        });
 
 
-    private List<Song> testSongList(){
-        List<Song> songs = new ArrayList<Song>();
-        return songs;
     }
 
     @Override
@@ -67,5 +82,10 @@ public class MainActivity extends AppCompatActivity implements ListView.OnItemCl
     @Override
     public void OnITunesError(String error) {
         Toast.makeText(this,error,Toast.LENGTH_SHORT).show();
+    }
+
+    private void hideKeyboard(){
+        InputMethodManager imm = (InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(), 0);
     }
 }
