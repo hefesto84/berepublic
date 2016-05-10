@@ -63,11 +63,11 @@ public class SongAdapter extends ArrayAdapter<Song> {
             holder = (ViewHolder) view.getTag();
         }
 
-        holder.albumName.setText(mSongs.get(position).getCollectionCensoredName());
-        holder.artistName.setText(mSongs.get(position).getArtistName());
-        holder.songName.setText(mSongs.get(position).getTrackName());
-        holder.album.setImageURI(Uri.parse(mSongs.get(position).getArtworkUrl60()));
-        holder.genreName.setText(mSongs.get(position).getPrimaryGenreName());
+        holder.albumName.setText(mSongs.get(position).collectionCensoredName);
+        holder.artistName.setText(mSongs.get(position).artistName);
+        holder.songName.setText(mSongs.get(position).trackName);
+        holder.album.setImageURI(Uri.parse(mSongs.get(position).artworkUrl60));
+        holder.genreName.setText(mSongs.get(position).primaryGenreName);
 
         return view;
     }

@@ -57,9 +57,9 @@ public class SuggestionsAdapter extends BaseAdapter implements Filterable {
             convertView = inflater.inflate(R.layout.item_list_song_suggestion, parent, false);
         }
 
-        ((TextView) convertView.findViewById(R.id.txtArtistName)).setText(getItem(i).getArtistName());
-        ((TextView) convertView.findViewById(R.id.txtTrackName)).setText(getItem(i).getTrackName());
-        ((SimpleDraweeView)convertView.findViewById(R.id.imgAlbum)).setImageURI(Uri.parse(getItem(i).getArtworkUrl30()));
+        ((TextView) convertView.findViewById(R.id.txtArtistName)).setText(getItem(i).artistName);
+        ((TextView) convertView.findViewById(R.id.txtTrackName)).setText(getItem(i).trackName);
+        ((SimpleDraweeView)convertView.findViewById(R.id.imgAlbum)).setImageURI(Uri.parse(getItem(i).artworkUrl30));
 
         return convertView;
     }

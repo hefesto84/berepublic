@@ -49,9 +49,9 @@ public class PlayerActivity extends AppCompatActivity {
     }
 
     private void load(){
-        imgSong.setImageURI(Uri.parse(mSong.getArtworkUrl100()));
-        txtBandName.setText(mSong.getArtistName());
-        txtSongName.setText(mSong.getTrackName());
+        imgSong.setImageURI(Uri.parse(mSong.artworkUrl100));
+        txtBandName.setText(mSong.artistName);
+        txtSongName.setText(mSong.trackName);
     }
 
     @OnClick({R.id.btnFastForward, R.id.btnNext, R.id.btnPause, R.id.btnPlay, R.id.btnPrevious, R.id.btnRewind})

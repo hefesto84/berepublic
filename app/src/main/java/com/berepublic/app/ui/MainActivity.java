@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements ListView.OnItemCl
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 Song song = (Song)adapterView.getItemAtPosition(position);
-                String criteria = song.getArtistName() + " " + song.getTrackName();
+                String criteria = song.artistName + " " + song.trackName;
                 txtSearch.setText(criteria);
                 hideKeyboard();
                 ITunesController.getInstance().fetchSongList(criteria,MainActivity.this);
