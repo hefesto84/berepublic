@@ -1,8 +1,15 @@
 <resources>
-    <string name="app_name">BeRepublic!</string>
+    <string name="app_name">BeRepublic</string>
     <string name="app_searchbox_hint">Type to search...</string>
     <string name="app_facebook_id"></string>
     <string name="app_error_itunes">ITunes connection error.</string>
+
+    <string name="activity_main_searchtitle">BeRepublic Music</string>
+    <string name="activity_main_searchfilters">Order by</string>
+    <string name="activity_main_order_by_genre">Genre</string>
+    <string name="activity_main_order_by_duration">Duration</string>
+    <string name="activity_main_order_by_price">Price</string>
+
     <string name="activity_player_bandname">Default Band Name</string>
     <string name="activity_player_songname">Default Song Name</string>
     <string name="activity_player_default_time">00:00</string>

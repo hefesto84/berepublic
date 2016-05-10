@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements ListView.OnItemCl
         mList.setAdapter(mAdapter);
         mList.setOnItemClickListener(this);
 
-        ITunesController.getInstance().fetchSongList("Rammstein",this);
+        ITunesController.getInstance().fetchSongList("Anaal Nathrakh",this);
     }
 
 

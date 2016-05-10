@@ -11,35 +11,35 @@ import java.util.Date;
 @Parcel
 public class Song {
 
-    private int artistId;
-    private long collectionId;
-    private long trackId;
-    private String artistName;
-    private String collectionName;
-    private String trackName;
-    private String collectionCensoredName;
-    private String trackCensoredName;
-    private String artistViewUrl;
-    private String collectionViewUrl;
-    private String trackViewUrl;
-    private String previewUrl;
-    private String artworkUrl30;
-    private String artworkUrl60;
-    private String artworkUrl100;
-    private float collectionPrice;
-    private float trackPrice;
-    private Date releaseDate;
-    private String collectionExplicitness;
-    private String trackExplicitness;
-    private int discCount;
-    private int discNumber;
-    private int trackCount;
-    private int trackNumber;
-    private int trackTimeMilis;
-    private String country;
-    private String currency;
-    private String primaryGenreName;
-    private boolean isStremeable;
+     int artistId;
+     long collectionId;
+     long trackId;
+     String artistName;
+     String collectionName;
+     String trackName;
+     String collectionCensoredName;
+     String trackCensoredName;
+     String artistViewUrl;
+     String collectionViewUrl;
+     String trackViewUrl;
+     String previewUrl;
+     String artworkUrl30;
+     String artworkUrl60;
+     String artworkUrl100;
+     float collectionPrice;
+     float trackPrice;
+     Date releaseDate;
+     String collectionExplicitness;
+     String trackExplicitness;
+     int discCount;
+     int discNumber;
+     int trackCount;
+     int trackNumber;
+     int trackTimeMilis;
+     String country;
+     String currency;
+     String primaryGenreName;
+     boolean isStremeable;
 
     public Song(){
 
