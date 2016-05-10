@@ -16,17 +16,16 @@ import com.berepublic.app.R;
 import com.berepublic.app.adapter.SongAdapter;
 import com.berepublic.app.adapter.SuggestionsAdapter;
 import com.berepublic.app.controller.ITunesController;
+import com.berepublic.app.filter.SongFilter;
 import com.berepublic.app.listener.ITunesListener;
 import com.berepublic.app.model.Song;
 import com.berepublic.app.utils.Constants;
 import com.berepublic.app.widget.SuggestionsTextView;
-import com.google.gson.Gson;
 
 import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import butterknife.Bind;
@@ -37,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements ListView.OnItemCl
 
     private SongAdapter mAdapter;
     private List<Song> mListSongs = new ArrayList<Song>();
+    private int mLastFilter = SongFilter.FILTER_DISABLED;
 
     @Bind(R.id.lstSongList)         ListView mList;
     @Bind(R.id.txtSearch)           SuggestionsTextView txtSearch;
@@ -85,6 +85,7 @@ public class MainActivity extends AppCompatActivity implements ListView.OnItemCl
         mAdapter.clear();
         mAdapter.addAll(mListSongs);
         mAdapter.notifyDataSetChanged();
+        mLastFilter = SongFilter.FILTER_DISABLED;
     }
 
     @Override
@@ -96,23 +97,49 @@ public class MainActivity extends AppCompatActivity implements ListView.OnItemCl
     public void orderBy(View view){
         switch (view.getId()){
             case R.id.btnOrderByDuration:
-                Collections.sort(mListSongs, Song.Duration);
+
+                mLastFilter =(((mLastFilter == SongFilter.FILTER_BY_DURATION_ASC) || (mLastFilter == SongFilter.FILTER_DISABLED))?SongFilter.FILTER_BY_DURATION_DES:SongFilter.FILTER_BY_DURATION_ASC);
+
+                if(mLastFilter == SongFilter.FILTER_BY_DURATION_ASC) {
+                    Collections.sort(mListSongs, Song.Duration);
+                }else {
+                    Collections.reverse(mListSongs);
+                }
+
                 break;
             case R.id.btnOrderByGenre:
-                Collections.sort(mListSongs, Song.Genre);
+
+                mLastFilter =(((mLastFilter == SongFilter.FILTER_BY_GENRE_ASC) || (mLastFilter == SongFilter.FILTER_DISABLED))?SongFilter.FILTER_BY_GENRE_DES:SongFilter.FILTER_BY_GENRE_ASC);
+
+                if(mLastFilter == SongFilter.FILTER_BY_GENRE_ASC) {
+                    Collections.sort(mListSongs, Song.Genre);
+                }else {
+                    Collections.reverse(mListSongs);
+                }
+
                 break;
             case R.id.btnOrderByPrice:
-                Collections.sort(mListSongs, Song.Price);
+
+                mLastFilter =(((mLastFilter == SongFilter.FILTER_BY_PRICE_ASC) || (mLastFilter == SongFilter.FILTER_DISABLED))?SongFilter.FILTER_BY_PRICE_DES:SongFilter.FILTER_BY_PRICE_ASC);
+
+                if(mLastFilter == SongFilter.FILTER_BY_PRICE_ASC) {
+                    Collections.sort(mListSongs, Song.Price);
+                }else {
+                    Collections.reverse(mListSongs);
+                }
+
                 break;
         }
 
         mAdapter.clear();
         mAdapter.addAll(mListSongs);
         mAdapter.notifyDataSetChanged();
+
     }
 
     private void hideKeyboard(){
         InputMethodManager imm = (InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(), 0);
     }
+
 }
