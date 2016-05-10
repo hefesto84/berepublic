@@ -25,7 +25,6 @@ public class AudioService extends Service implements MediaPlayer.OnPreparedListe
     private MediaPlayer mPlayer;
     private List<Song> mSongs;
     private Playlist mPlaylist;
-    //private int mCurrentSong;
     private final IBinder mAudioServiceBinder = new AudioServiceBinder();
 
     @Override
@@ -35,7 +34,6 @@ public class AudioService extends Service implements MediaPlayer.OnPreparedListe
     }
 
     public void initialize(){
-       // mCurrentSong = 0;
         mPlayer = new MediaPlayer();
         mPlayer.setWakeMode(getApplicationContext(), PowerManager.PARTIAL_WAKE_LOCK);
         mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
@@ -45,13 +43,12 @@ public class AudioService extends Service implements MediaPlayer.OnPreparedListe
     }
 
     public void addPlayList(Playlist playlist){
-        //this.mSongs = songs;
         mPlaylist = playlist;
     }
 
     public void nextSong(){
         mPlaylist.nextSong();
-        pauseSong();
+        playSong();
     }
 
     public void previousSong(){
