@@ -9,7 +9,6 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.berepublic.app.R;
-import com.berepublic.app.adapter.holder.SongHolder;
 import com.berepublic.app.model.Song;
 import com.facebook.drawee.view.SimpleDraweeView;
 
