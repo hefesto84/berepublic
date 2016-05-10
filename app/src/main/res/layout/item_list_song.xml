@@ -16,7 +16,7 @@
 
         <com.facebook.drawee.view.SimpleDraweeView
             android:background="@color/beRepublic_gray"
-            android:id="@+id/imgSong"
+            android:id="@+id/imgAlbum"
             android:layout_width="80sp"
             android:layout_height="80sp" />
 
