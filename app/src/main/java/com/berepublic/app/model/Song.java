@@ -2,6 +2,7 @@ package com.berepublic.app.model;
 
 import org.parceler.Parcel;
 
+import java.util.Comparator;
 import java.util.Date;
 
 /**
@@ -9,7 +10,7 @@ import java.util.Date;
  */
 
 @Parcel
-public class Song {
+public class Song implements Comparable<Song>{
 
     public int artistId;
     public long collectionId;
@@ -45,4 +46,47 @@ public class Song {
 
     }
 
+    @Override
+    public int compareTo(Song song) {
+        if(song.trackPrice < this.trackPrice){
+            return -1;
+        }
+        if(song.trackPrice > this.trackPrice){
+            return 1;
+        }
+        return 0;
+    }
+
+    public static Comparator<Song> Price = new Comparator<Song>() {
+        @Override
+        public int compare(Song song, Song t1) {
+            if(song.trackPrice < t1.trackPrice){
+                return -1;
+            }
+            if(song.trackPrice > t1.trackPrice){
+                return 1;
+            }
+            return 0;
+        }
+    };
+
+    public static Comparator<Song> Duration = new Comparator<Song>() {
+        @Override
+        public int compare(Song song, Song t1) {
+            if(song.trackTimeMilis < t1.trackTimeMilis){
+                return -1;
+            }
+            if(song.trackTimeMilis > t1.trackTimeMilis){
+                return 1;
+            }
+            return 0;
+        }
+    };
+
+    public static Comparator<Song> Genre = new Comparator<Song>() {
+        @Override
+        public int compare(Song song, Song t1) {
+            return song.primaryGenreName.toLowerCase().compareTo(t1.primaryGenreName.toLowerCase());
+        }
+    };
 }

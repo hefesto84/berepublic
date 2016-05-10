@@ -20,6 +20,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
@@ -29,9 +30,11 @@ public class SuggestionsAdapter extends BaseAdapter implements Filterable {
 
     private Context mContext;
     private List<Song> mSongs = new ArrayList<Song>();
+    private LayoutInflater mInflater;
 
     public SuggestionsAdapter(Context context){
         mContext = context;
+        mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
@@ -50,18 +53,24 @@ public class SuggestionsAdapter extends BaseAdapter implements Filterable {
     }
 
     @Override
-    public View getView(int i, View convertView, ViewGroup parent) {
-        if (convertView == null) {
-            LayoutInflater inflater = (LayoutInflater) mContext
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.item_list_song_suggestion, parent, false);
+    public View getView(int position, View view, ViewGroup parent) {
+
+        ViewHolder holder;
+
+        if (view == null) {
+            view = mInflater.inflate(R.layout.item_list_song_suggestion, parent, false);
+            holder = new ViewHolder(view);
+            view.setTag(holder);
+        } else {
+            holder = (ViewHolder) view.getTag();
         }
 
-        ((TextView) convertView.findViewById(R.id.txtArtistName)).setText(getItem(i).artistName);
-        ((TextView) convertView.findViewById(R.id.txtTrackName)).setText(getItem(i).trackName);
-        ((SimpleDraweeView)convertView.findViewById(R.id.imgAlbum)).setImageURI(Uri.parse(getItem(i).artworkUrl30));
+        holder.artistName.setText(mSongs.get(position).artistName);
+        holder.songName.setText(mSongs.get(position).trackName);
+        holder.album.setImageURI(Uri.parse(mSongs.get(position).artworkUrl60));
 
-        return convertView;
+        return view;
+
     }
 
     @Override
@@ -89,5 +98,16 @@ public class SuggestionsAdapter extends BaseAdapter implements Filterable {
             }};
         return filter;
 
+    }
+
+    static class ViewHolder{
+
+        @Bind(R.id.txtSongName)     TextView songName;
+        @Bind(R.id.txtArtistName)   TextView artistName;
+        @Bind(R.id.imgAlbum)        SimpleDraweeView album;
+
+        public ViewHolder(View view){
+            ButterKnife.bind(this,view);
+        }
     }
 }
