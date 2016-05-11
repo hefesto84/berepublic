@@ -98,6 +98,11 @@ public class MainActivity extends AppCompatActivity implements ListView.OnItemCl
 
     @OnClick({R.id.btnOrderByDuration, R.id.btnOrderByGenre, R.id.btnOrderByPrice})
     public void orderBy(View view){
+
+        if(mPlaylist==null || mPlaylist.songs.size() == 0 || mPlaylist.songs == null){
+            return;
+        }
+
         switch (view.getId()){
             case R.id.btnOrderByDuration:
 
