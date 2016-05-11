@@ -1,19 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/beRepublic_white"
+    android:background="@color/beRepublic_black"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="8dp"
     tools:context=".ui.MainActivity">
 
     <TextView
-        android:padding="8dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textStyle="bold"
-        android:textSize="22dp"
+        style="@style/MainCaption"
         android:text="@string/activity_main_searchtitle"
         android:id="@+id/txtSearchTitle" />
 
@@ -26,17 +21,20 @@
         android:layout_height="wrap_content">
 
         <com.berepublic.app.widget.SuggestionsTextView
-            android:paddingLeft="10dp"
+            android:padding="10dp"
             android:textSize="18sp"
+            android:textColor="@color/beRepublic_white"
             android:hint="@string/app_searchbox_hint"
+            android:textColorHint="@color/beRepublic_white"
             android:background="@drawable/edit_text"
             android:layout_weight="0.9"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/txtSearch" />
         <ImageButton
-            android:padding="2dp"
-            android:background="@color/beRepublic_white"
+            android:visibility="gone"
+            android:padding="4dp"
+            android:background="@color/beRepublic_black"
             android:layout_alignParentRight="true"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -52,12 +50,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:padding="8dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textStyle="bold"
+        <TextView style="@style/ContainerCaption"
             android:text="@string/activity_main_searchfilters"
             android:id="@+id/textView3" />
 
@@ -67,29 +60,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <Button
-                android:layout_weight="0.3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <Button style="@style/ButtonFilter"
                 android:text="@string/activity_main_order_by_genre"
                 android:id="@+id/btnOrderByGenre" />
-            <Button
-                android:layout_weight="0.3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <Button style="@style/ButtonFilter"
                 android:text="@string/activity_main_order_by_duration"
                 android:id="@+id/btnOrderByDuration" />
-            <Button
-                android:layout_weight="0.3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <Button style="@style/ButtonFilter"
                 android:text="@string/activity_main_order_by_price"
                 android:id="@+id/btnOrderByPrice" />
         </LinearLayout>
+
     </LinearLayout>
 
     <ListView
         android:id="@+id/lstSongList"
+        android:background="@color/beRepublic_grayb"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/llFilters"
