@@ -2,7 +2,6 @@ package com.berepublic.app.utils;
 
 /**
  * Created by dani on 9/5/16.
- * https://futurestud.io/blog/retrofit-multiple-query-parameters-of-same-name
  */
 public class Constants {
     public static final String TAG = "BeRepublic!";
