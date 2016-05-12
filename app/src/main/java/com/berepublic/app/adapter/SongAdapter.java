@@ -10,8 +10,11 @@ import android.widget.TextView;
 
 import com.berepublic.app.R;
 import com.berepublic.app.model.Song;
+import com.berepublic.app.utils.Utils;
 import com.facebook.drawee.view.SimpleDraweeView;
 
+import java.sql.Date;
+import java.util.Calendar;
 import java.util.List;
 
 import butterknife.Bind;
@@ -69,6 +72,10 @@ public class SongAdapter extends ArrayAdapter<Song> {
         holder.album.setImageURI(Uri.parse(mSongs.get(position).artworkUrl60));
         holder.genreName.setText(mSongs.get(position).primaryGenreName);
 
+        String date = Utils.toSimpleDate(mSongs.get(position).releaseDate);
+        holder.releaseDate.setText(date);
+
+        holder.price.setText(mSongs.get(position).trackPrice + mSongs.get(position).currency);
         return view;
     }
 
@@ -79,6 +86,8 @@ public class SongAdapter extends ArrayAdapter<Song> {
         @Bind(R.id.txtAlbumName) TextView albumName;
         @Bind(R.id.imgAlbum) SimpleDraweeView album;
         @Bind(R.id.txtGenre) TextView genreName;
+        @Bind(R.id.txtReleaseDate) TextView releaseDate;
+        @Bind(R.id.txtPrice) TextView price;
 
         public ViewHolder(View view){
             ButterKnife.bind(this,view);

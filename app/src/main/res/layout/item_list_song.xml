@@ -36,7 +36,18 @@
                 android:text="Industrial"
                 android:id="@+id/txtGenre" />
 
-
+            <TextView
+                android:padding="4sp"
+                android:layout_below="@id/txtGenre"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/beRepublic_white"
+                android:textStyle="bold"
+                android:textSize="12dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="14,99"
+                android:id="@+id/txtPrice" />
         </RelativeLayout>
 
         <LinearLayout

@@ -14,7 +14,7 @@ import android.widget.ProgressBar;
 public class SuggestionsTextView extends AutoCompleteTextView {
 
     private static final int MESSAGE_TEXT_CHANGED = 100;
-    private static final int DEFAULT_AUTOCOMPLETE_DELAY = 750;
+    private static final int DEFAULT_AUTOCOMPLETE_DELAY = 250;
 
     private int mAutoCompleteDelay = DEFAULT_AUTOCOMPLETE_DELAY;
     private ProgressBar mLoadingIndicator;

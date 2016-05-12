@@ -2,6 +2,8 @@ package com.berepublic.app.utils;
 
 import com.berepublic.app.model.Song;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -9,12 +11,9 @@ import java.util.List;
  */
 public class Utils {
 
-    public static final int ORDER_BY_PRICE      = 0;
-    public static final int ORDER_BY_GENRE      = 1;
-    public static final int ORDER_BY_DURATION   = 2;
-
-    public static List<Song> orderSongList(List<Song> songs, int orderBy){
-        return songs;
+    public static String toSimpleDate(Date date){
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        return formatter.format(date);
     }
 
 }

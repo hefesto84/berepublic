@@ -17,8 +17,8 @@ public class BaseApplication extends Application {
     public void onCreate() {
         super.onCreate();
         Fresco.initialize(this);
-        //FacebookSdk.sdkInitialize(this);
-        //AppEventsLogger.activateApp(this);
+        FacebookSdk.sdkInitialize(this);
+        AppEventsLogger.activateApp(this);
     }
 
     @Override

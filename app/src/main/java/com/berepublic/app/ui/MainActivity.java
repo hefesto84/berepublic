@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements ListView.OnItemCl
         mList.setAdapter(mAdapter);
         mList.setOnItemClickListener(this);
 
-        txtSearch.setThreshold(1);
+        txtSearch.setThreshold(3);
 
         final SuggestionsAdapter adapter = new SuggestionsAdapter(this);
 
@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements ListView.OnItemCl
         Toast.makeText(this,error,Toast.LENGTH_SHORT).show();
     }
 
-    @OnClick({R.id.btnOrderByDuration, R.id.btnOrderByGenre, R.id.btnOrderByPrice})
+    @OnClick({R.id.btnOrderByDuration, R.id.btnOrderByGenre, R.id.btnOrderByPrice, R.id.btnSearch})
     public void orderBy(View view){
 
         if(mPlaylist==null || mPlaylist.songs.size() == 0 || mPlaylist.songs == null){
@@ -136,6 +136,12 @@ public class MainActivity extends AppCompatActivity implements ListView.OnItemCl
                     Collections.reverse(mPlaylist.songs);
                 }
 
+                break;
+
+            case R.id.btnSearch:
+                if(txtSearch.getText().length()!=0 && txtSearch.getText() != null) {
+                    ITunesController.getInstance().fetchSongList(txtSearch.getText().toString(), MainActivity.this);
+                }
                 break;
         }
 

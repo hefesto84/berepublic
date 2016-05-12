@@ -19,6 +19,7 @@ import com.berepublic.app.model.Song;
 import com.berepublic.app.service.AudioService;
 import com.berepublic.app.utils.Constants;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.internal.WebDialog;
 
 import org.parceler.Parcel;
 import org.parceler.Parcels;
@@ -88,7 +89,7 @@ public class PlayerActivity extends AppCompatActivity {
         imgBackground.setImageURI(Uri.parse(mPlaylist.songs.get(mPlaylist.currentSong).artworkUrl100));
     }
 
-    @OnClick({R.id.btnFastForward, R.id.btnNext, R.id.btnPause, R.id.btnPlay, R.id.btnPrevious, R.id.btnRewind})
+    @OnClick({R.id.btnFastForward, R.id.btnNext, R.id.btnPause, R.id.btnPlay, R.id.btnPrevious, R.id.btnRewind, R.id.btnShare})
     public void OnButtonClick(View view){
         switch (view.getId()){
             case R.id.btnFastForward:
@@ -115,7 +116,19 @@ public class PlayerActivity extends AppCompatActivity {
                 break;
             case R.id.btnRewind:
                 break;
+            case R.id.btnShare:
+                shareContent();
+                break;
         }
+    }
+
+    private void shareContent(){
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        Uri uri = Uri.parse(mPlaylist.songs.get(mPlaylist.currentSong).artworkUrl100);
+        shareIntent.setType("*/*");
+        shareIntent.putExtra(Intent.EXTRA_TEXT, mPlaylist.songs.get(mPlaylist.currentSong).trackName);
+        shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
+        startActivity(Intent.createChooser(shareIntent, getString(R.string.activity_player_share_whatareyoulistening)));
     }
 
     private ServiceConnection audioServiceConnection = new ServiceConnection(){

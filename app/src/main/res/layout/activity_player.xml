@@ -65,6 +65,7 @@
             android:id="@+id/llPlayerInformation"
             android:layout_below="@id/llSongInformation"
             android:padding="8dp"
+            android:visibility="invisible"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -127,6 +128,7 @@
                 android:id="@+id/btnPrevious" />
 
             <ImageButton
+                android:visibility="invisible"
                 android:layout_weight="0.125"
                 android:background="#00000000"
                 android:layout_width="wrap_content"
@@ -152,6 +154,7 @@
                 android:id="@+id/btnPause" />
 
             <ImageButton
+                android:visibility="invisible"
                 android:layout_weight="0.125"
                 android:background="#00000000"
                 android:layout_width="wrap_content"
@@ -167,5 +170,12 @@
                 android:src="@android:drawable/ic_media_next"
                 android:id="@+id/btnNext" />
         </LinearLayout>
+        <Button
+            android:id="@+id/btnShare"
+            style="@style/ButtonFilter"
+            android:layout_below="@id/llPlayerControllers"
+            android:text="@string/activity_player_share_whatareyoulistening"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </RelativeLayout>
 </RelativeLayout>
