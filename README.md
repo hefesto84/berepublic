@@ -1,4 +1,4 @@
-# berepublic
+# BeRepublic Technical Test [PASSED]
 BeRepublic Technical Test
 
 Technical Test for BeRepublic
